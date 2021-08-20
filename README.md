@@ -2,7 +2,7 @@ Converter for EGRN-extractions from xml to csv
 
 ## Install
 
-`composer update`
+`composer install`
 
 ## Usage
 
