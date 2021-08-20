@@ -4,7 +4,6 @@ namespace EgrnXml2CsvConv\Util;
 
 final class Util
 {
-
     public static function isSequentialArray($array): bool
     {
         if (is_array($array) === false) {

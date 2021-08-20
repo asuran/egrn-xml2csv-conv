@@ -10,15 +10,25 @@ use EgrnXml2CsvConv\Util\Util;
 
 final class ExtractObjectDTOBuilder
 {
+    /**
+     * @throws \Exception
+     */
     public static function build(array $data): ExtractObjectDTO
     {
+        $extractObjectDTO = new ExtractObjectDTO();
+
         if (isset($data['ReestrExtract']['ExtractObjectRight']['ExtractObject']) === false) {
-            return new ExtractObjectDTO();
+            if (isset($data['ReestrExtract']['NoticelObj']['NoticeObj']['ObjectInfo'])) {
+                $cadastralNumber = self::parseCadastralNumber($data['ReestrExtract']['NoticelObj']['NoticeObj']['ObjectInfo']);
+                $extractObjectDTO->setCadastralNumber($cadastralNumber);
+            }
+
+            return $extractObjectDTO;
         }
 
         $extractObjectData = $data['ReestrExtract']['ExtractObjectRight']['ExtractObject'];
 
-        $extractObjectDTO = (new ExtractObjectDTO())
+        $extractObjectDTO
             ->setCadastralNumber($extractObjectData['ObjectDesc']['CadastralNumber'] ?? null)
             ->setAssignationCodeText($extractObjectData['ObjectDesc']['Assignation_Code_Text'] ?? null)
             ->setArea($extractObjectData['ObjectDesc']['Area']['Area'] ?? null);
@@ -83,5 +93,22 @@ final class ExtractObjectDTOBuilder
         }
 
         return $normalizedOwnersData;
+    }
+
+    /**
+     * @param string $objectInfo
+     * @return string
+     * @throws \Exception
+     */
+    private static function parseCadastralNumber(string $objectInfo): string
+    {
+        $matches = [];
+        $pregMatchResult = preg_match('/\d{2}:\d{2}:\d{1,7}:\d{1,}/', $objectInfo, $matches);
+
+        if ($pregMatchResult === 0 || count($matches) !== 1) {
+            throw new \Exception('Can not parse cadastral number');
+        }
+
+        return reset($matches);
     }
 }

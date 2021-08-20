@@ -13,7 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class ConvertCommand extends Command
 {
-    public const COLUMN_TITLES = [
+    private const COLUMN_TITLES = [
         'Номер помещения',
         'Назначение помещения (жилое/нежилое)',
         'S, кв.м',

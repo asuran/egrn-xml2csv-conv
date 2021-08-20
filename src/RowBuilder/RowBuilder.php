@@ -15,12 +15,24 @@ final class RowBuilder
     public static function build(ExtractObjectDTO $extractObjectDTO): iterable
     {
         $row = [
-            'Номер помещения' => $extractObjectDTO->getCadastralNumber(),
-            'Назначение помещения (жилое/нежилое)' => $extractObjectDTO->getAssignationCodeText(),
-            'S, кв.м' => $extractObjectDTO->getArea(),
+            'Номер помещения' => $extractObjectDTO->getCadastralNumber() ?? self::EMPTY_PLACEHOLDER,
+            'Назначение помещения (жилое/нежилое)' => $extractObjectDTO->getAssignationCodeText()  ?? self::EMPTY_PLACEHOLDER,
+            'S, кв.м' => $extractObjectDTO->getArea() ?? self::EMPTY_PLACEHOLDER,
+            'ФИО собственника' => self::EMPTY_PLACEHOLDER,
+            'Наименование организации собственника' => self::EMPTY_PLACEHOLDER,
+            'Доля в праве на помещение' => self::EMPTY_PLACEHOLDER,
+            'Номер регистрации права собственности' => self::EMPTY_PLACEHOLDER,
+            'Дата регистрации права собственности' => self::EMPTY_PLACEHOLDER,
+            'Дата прекращения права' => self::EMPTY_PLACEHOLDER,
         ];
 
-        foreach ($extractObjectDTO->getOrderRegistrationPairs() as $pair) {
+        $ownerRegistrationPairs = $extractObjectDTO->getOrderRegistrationPairs();
+
+        if (count($ownerRegistrationPairs) === 0) {
+            return yield $row;
+        }
+
+        foreach ($ownerRegistrationPairs as $pair) {
 
             foreach ($pair->getOwners() as $owner) {
                 $row['ФИО собственника'] = $owner->getPersonName() ?? self::EMPTY_PLACEHOLDER;
