@@ -22,6 +22,7 @@ final class RowBuilder
             'Номер на экспликации' => $extractObjectDTO->getExplication() ?? self::EMPTY_PLACEHOLDER,
             'ФИО собственника' => self::EMPTY_PLACEHOLDER,
             'Наименование организации собственника' => self::EMPTY_PLACEHOLDER,
+            'Описание собственности' => self::EMPTY_PLACEHOLDER,
             'Доля в праве на помещение' => self::EMPTY_PLACEHOLDER,
             'Номер регистрации права собственности' => self::EMPTY_PLACEHOLDER,
             'Дата регистрации права собственности' => self::EMPTY_PLACEHOLDER,
@@ -40,6 +41,7 @@ final class RowBuilder
                 $row['ФИО собственника'] = $owner->getPersonName() ?? self::EMPTY_PLACEHOLDER;
                 $row['Наименование организации собственника'] = $owner->getOrganizationName() ?? self::EMPTY_PLACEHOLDER;
 
+                $row['Описание собственности'] = $pair->getRegistration()->getRegistrationName() ?? self::EMPTY_PLACEHOLDER;
                 $row['Доля в праве на помещение'] = $pair->getRegistration()->getShareText() ?? self::EMPTY_PLACEHOLDER;
                 $row['Номер регистрации права собственности'] = $pair->getRegistration()->getRegNumber() ?? self::EMPTY_PLACEHOLDER;
                 $row['Дата регистрации права собственности'] = $pair->getRegistration()->getRegDate() ?? self::EMPTY_PLACEHOLDER;
