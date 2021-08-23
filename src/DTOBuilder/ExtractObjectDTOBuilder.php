@@ -32,8 +32,8 @@ final class ExtractObjectDTOBuilder
             ->setCadastralNumber($extractObjectData['ObjectDesc']['CadastralNumber'] ?? null)
             ->setAssignationCodeText($extractObjectData['ObjectDesc']['Assignation_Code_Text'] ?? null)
             ->setArea($extractObjectData['ObjectDesc']['Area']['Area'] ?? null)
-            ->setObjectContent($extractObjectData['ObjectDesc']['Address']['Content'] ?? null);
-#            ->setExplication($extractObjectData['ObjectDesc']['FloorPlan_No']['Explication'] ?? null);
+            ->setObjectContent($extractObjectData['ObjectDesc']['Address']['Content'] ?? null)
+            ->setExplication($extractObjectData['ObjectDesc']['FloorPlan_No']['Explication'] ?? null);
 
         $registrationsData = self::normalizeRegistrations($extractObjectData['Registration']);
         $ownersData = self::normalizeOwners($extractObjectData['Owner']);

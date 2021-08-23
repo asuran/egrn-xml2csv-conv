@@ -63,6 +63,18 @@ final class ExtractObjectDTO
         return $this;
     }
 
+    public function getExplication(): ?string
+    {
+        return $this->explication;
+    }
+
+    public function setExplication(?string $explication): self
+    {
+        $this->explication = $explication;
+
+        return $this;
+    }
+
     /**
      * @return OwnerRegistrationPair[]
      */
