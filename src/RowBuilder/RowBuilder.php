@@ -15,9 +15,10 @@ final class RowBuilder
     public static function build(ExtractObjectDTO $extractObjectDTO): iterable
     {
         $row = [
-            'Номер помещения' => $extractObjectDTO->getCadastralNumber() ?? self::EMPTY_PLACEHOLDER,
+            'Кадастровый номер' => $extractObjectDTO->getCadastralNumber() ?? self::EMPTY_PLACEHOLDER,
             'Назначение помещения (жилое/нежилое)' => $extractObjectDTO->getAssignationCodeText()  ?? self::EMPTY_PLACEHOLDER,
             'S, кв.м' => $extractObjectDTO->getArea() ?? self::EMPTY_PLACEHOLDER,
+            'Адрес' => $extractObjectDTO->getObjectContent() ?? self::EMPTY_PLACEHOLDER,
             'ФИО собственника' => self::EMPTY_PLACEHOLDER,
             'Наименование организации собственника' => self::EMPTY_PLACEHOLDER,
             'Доля в праве на помещение' => self::EMPTY_PLACEHOLDER,

@@ -51,6 +51,18 @@ final class ExtractObjectDTO
         return $this;
     }
 
+    public function getObjectContent(): ?string
+    {
+        return $this->objectcontent;
+    }
+
+    public function setObjectContent(?string $objectcontent): self
+    {
+        $this->objectcontent = $objectcontent;
+
+        return $this;
+    }
+
     /**
      * @return OwnerRegistrationPair[]
      */
