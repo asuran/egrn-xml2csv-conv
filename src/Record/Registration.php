@@ -48,6 +48,18 @@ final class Registration
         return $this;
     }
 
+    public function getRegistrationName(): ?string
+    {
+        return $this->registrationName;
+    }
+
+    public function setRegistrationName(?string $registrationName): self
+    {
+        $this->registrationName = $registrationName;
+
+        return $this;
+    }
+
     public function getShareText(): ?string
     {
         return $this->shareText;
